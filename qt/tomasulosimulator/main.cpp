@@ -2,8 +2,16 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
-    cout << "Hello World!" << endl;
+    if(argc < 2)
+    {
+        cout << "Usage: " << argv[0] << " <Input File>" <<endl;
+    }
+    else
+    {
+
+    }
+
     return 0;
 }
