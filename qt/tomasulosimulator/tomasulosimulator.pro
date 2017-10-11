@@ -4,8 +4,10 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    instructionrecord.cpp
+    instructionrecord.cpp \
+    processor.cpp
 
 HEADERS += \
     fifo.h \
-    instructionrecord.h
+    instructionrecord.h \
+    processor.h
