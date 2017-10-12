@@ -10,4 +10,5 @@ SOURCES += main.cpp \
 HEADERS += \
     fifo.h \
     instructionrecord.h \
-    processor.h
+    processor.h \
+    betterarray.h

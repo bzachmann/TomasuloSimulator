@@ -6,7 +6,8 @@
 using namespace std;
 
 Processor processor;
-InstructionQueue iq;
+InstructionQueue initialIQ;
+RegisterFile initialRF;
 uint16_t numCycles = 0;
 
 bool parseInputFile(char* file);
@@ -19,7 +20,7 @@ int main(int argc, char* argv[])
     }
     else if (parseInputFile(argv[1]))
     {
-        processor.init(iq);
+        processor.init(initialIQ, initialRF);
         for(uint16_t i = 0; i < numCycles; i++)
         {
             processor.step();
