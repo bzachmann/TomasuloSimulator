@@ -5,10 +5,14 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     instructionrecord.cpp \
-    processor.cpp
+    processor.cpp \
+    reservationstationrecord.cpp \
+    reservationstationaddsub.cpp
 
 HEADERS += \
     fifo.h \
     instructionrecord.h \
     processor.h \
-    betterarray.h
+    betterarray.h \
+    reservationstationrecord.h \
+    reservationstationaddsub.h

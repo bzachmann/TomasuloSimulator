@@ -18,5 +18,12 @@ void Processor::init(InstructionQueue iq, RegisterFile rf)
 
 void Processor::step()
 {
+    //broadcast and update RAT, RF, and Both RSs
 
+    //dispatch
+
+    //issue
+
+    //step RSs, step FUs
+    RSAddSub.step();
 }

@@ -4,6 +4,7 @@
 #include "fifo.h"
 #include "instructionrecord.h"
 #include "betterarray.h"
+#include "reservationstationaddsub.h"
 
 #define IQ_SIZE     (10)
 #define RF_SIZE     (8)
@@ -16,13 +17,15 @@ class Processor
 public:
     Processor() :
         IQ(),
-        RF() {}
+        RF(),
+        RSAddSub(){}
     void init(InstructionQueue iq, RegisterFile rf);
     void step();
 
 private:
     InstructionQueue IQ;
     RegisterFile RF;
+    ReservationStationAddSub RSAddSub;
 
 };
 
