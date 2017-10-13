@@ -5,6 +5,7 @@
 #include "instructionrecord.h"
 #include "betterarray.h"
 #include "reservationstationaddsub.h"
+#include "reservationstationmuldiv.h"
 
 #define IQ_SIZE     (10)
 #define RF_SIZE     (8)
@@ -18,7 +19,8 @@ public:
     Processor() :
         IQ(),
         RF(),
-        RSAddSub(){}
+        RSAddSub(),
+        RSMulDiv(){}
     void init(InstructionQueue iq, RegisterFile rf);
     void step();
 
@@ -26,6 +28,7 @@ private:
     InstructionQueue IQ;
     RegisterFile RF;
     ReservationStationAddSub RSAddSub;
+    ReservationStationMulDiv RSMulDiv;
 
 };
 

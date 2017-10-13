@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     instructionrecord.cpp \
     processor.cpp \
     reservationstationrecord.cpp \
-    reservationstationaddsub.cpp
+    reservationstationaddsub.cpp \
+    reservationstationmuldiv.cpp
 
 HEADERS += \
     fifo.h \
@@ -15,4 +16,5 @@ HEADERS += \
     processor.h \
     betterarray.h \
     reservationstationrecord.h \
-    reservationstationaddsub.h
+    reservationstationaddsub.h \
+    reservationstationmuldiv.h

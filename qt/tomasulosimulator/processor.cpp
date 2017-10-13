@@ -26,4 +26,5 @@ void Processor::step()
 
     //step RSs, step FUs
     RSAddSub.step();
+    RSMulDiv.step();
 }
