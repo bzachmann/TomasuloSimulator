@@ -8,7 +8,8 @@ SOURCES += main.cpp \
     processor.cpp \
     reservationstationrecord.cpp \
     reservationstationaddsub.cpp \
-    reservationstationmuldiv.cpp
+    reservationstationmuldiv.cpp \
+    functionalunit.cpp
 
 HEADERS += \
     fifo.h \
@@ -17,4 +18,5 @@ HEADERS += \
     betterarray.h \
     reservationstationrecord.h \
     reservationstationaddsub.h \
-    reservationstationmuldiv.h
+    reservationstationmuldiv.h \
+    functionalunit.h
