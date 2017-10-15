@@ -27,6 +27,7 @@ void Processor::step()
         RSMulDiv.capture(broadcastResults.getDestTag(), broadcastResults.getResult());
         RFRAT.capture(broadcastResults.getDestTag(), broadcastResults.getResult());
     }
+
     //dispatch
     ReservationStationRecord dispatchedInstr;
     if(!FUAdd.isBusy())

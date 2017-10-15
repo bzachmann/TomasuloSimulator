@@ -9,7 +9,7 @@ void RegisterFileRegisterAllocationTable::init(RegisterFileArray initialRf)
         {
             rfRatRecords[i].setRfValue(tempValue);
         }
-        rfRatRecords[i].setRfValue(ReservationStationRecord::TAG_UNDEF);
+        rfRatRecords[i].setRatTag(ReservationStationRecord::TAG_UNDEF);
     }
 }
 
