@@ -8,30 +8,29 @@
 #include "reservationstationmuldiv.h"
 #include "functionalunitadd.h"
 #include "functionalunitmul.h"
+#include "registerfileregisterallocationtable.h"
 
 #define IQ_SIZE     (10)
-#define RF_SIZE     (8)
 
 typedef Fifo<InstructionRecord, IQ_SIZE> InstructionQueue;
-typedef BetterArray<RF_SIZE> RegisterFile;
 
 class Processor
 {
 public:
     Processor() :
         IQ(),
-        RF(),
+        RFRAT(),
         RSAddSub(),
         RSMulDiv(),
         FUAdd(),
         FUMul(){}
 
-    void init(InstructionQueue iq, RegisterFile rf);
+    void init(InstructionQueue iq, RegisterFileArray rf);
     void step();
 
 private:
     InstructionQueue IQ;
-    RegisterFile RF;
+    RegisterFileRegisterAllocationTable RFRAT;
     ReservationStationAddSub RSAddSub;
     ReservationStationMulDiv RSMulDiv;
     FunctionalUnitAdd FUAdd;

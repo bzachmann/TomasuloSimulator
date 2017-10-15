@@ -1,6 +1,6 @@
 #include "processor.h"
 
-void Processor::init(InstructionQueue iq, RegisterFile rf)
+void Processor::init(InstructionQueue iq, RegisterFileArray rf)
 {
     InstructionRecord myInstr;
     while(iq.get(myInstr))
@@ -8,12 +8,7 @@ void Processor::init(InstructionQueue iq, RegisterFile rf)
         IQ.put(myInstr);
     }
 
-    for(uint16_t i = 0; i < rf.getSize(); i++)
-    {
-        int32_t tempValue;
-        rf.getValue(i, tempValue);
-        RF.setValue(i, tempValue);
-    }
+    RFRAT.init(rf);
 }
 
 void Processor::step()

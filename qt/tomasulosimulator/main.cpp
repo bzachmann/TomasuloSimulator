@@ -8,7 +8,7 @@ using namespace std;
 
 Processor processor;
 InstructionQueue initialIQ;
-RegisterFile initialRF;
+RegisterFileArray initialRF;
 uint16_t numCycles = 0;
 
 bool parseInputFile(char* file);

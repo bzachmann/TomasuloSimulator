@@ -11,7 +11,9 @@ SOURCES += main.cpp \
     reservationstationmuldiv.cpp \
     functionalunit.cpp \
     functionalunitadd.cpp \
-    functionalunitmul.cpp
+    functionalunitmul.cpp \
+    registerfileregisterallocationtable.cpp \
+    rfratrecord.cpp
 
 HEADERS += \
     fifo.h \
@@ -23,4 +25,6 @@ HEADERS += \
     reservationstationmuldiv.h \
     functionalunit.h \
     functionalunitadd.h \
-    functionalunitmul.h
+    functionalunitmul.h \
+    registerfileregisterallocationtable.h \
+    rfratrecord.h
