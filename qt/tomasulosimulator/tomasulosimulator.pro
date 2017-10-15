@@ -9,7 +9,9 @@ SOURCES += main.cpp \
     reservationstationrecord.cpp \
     reservationstationaddsub.cpp \
     reservationstationmuldiv.cpp \
-    functionalunit.cpp
+    functionalunit.cpp \
+    functionalunitadd.cpp \
+    functionalunitmul.cpp
 
 HEADERS += \
     fifo.h \
@@ -19,4 +21,6 @@ HEADERS += \
     reservationstationrecord.h \
     reservationstationaddsub.h \
     reservationstationmuldiv.h \
-    functionalunit.h
+    functionalunit.h \
+    functionalunitadd.h \
+    functionalunitmul.h

@@ -25,7 +25,7 @@ public:
         RSMulDiv(),
         FUAdd(),
         FUMul(){}
-
+ 
     void init(InstructionQueue iq, RegisterFile rf);
     void step();
 

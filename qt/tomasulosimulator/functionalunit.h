@@ -41,7 +41,7 @@ public:
     bool broadcast(CDBObject &result);
 
 
-private:
+protected:
     ReservationStationRecord::rsrtag_t destTag;
     InstructionRecord::opcode_t opcode;
     int32_t operand1;
