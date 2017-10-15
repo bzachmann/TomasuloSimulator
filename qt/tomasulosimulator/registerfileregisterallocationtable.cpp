@@ -25,10 +25,27 @@ void RegisterFileRegisterAllocationTable::capture(ReservationStationRecord::rsrt
     }
 }
 
-void RegisterFileRegisterAllocationTable::tag(uint8_t index, ReservationStationRecord::rsrtag_t tag)
+void RegisterFileRegisterAllocationTable::tag(uint16_t index, ReservationStationRecord::rsrtag_t tag)
 {
     if(index < RF_SIZE)
     {
         rfRatRecords[index].setRatTag(tag);
+    }
+}
+
+void RegisterFileRegisterAllocationTable::getSource(uint16_t index, ReservationStationRecord::rsrtag_t &tag, int32_t &value)
+{
+    if(index < RF_SIZE)
+    {
+        tag = rfRatRecords[index].getRatTag();
+        if(tag == ReservationStationRecord::TAG_UNDEF)
+        {
+            value = rfRatRecords[index].getRfValue();
+        }
+        else
+        {
+            value = 0;
+        }
+
     }
 }

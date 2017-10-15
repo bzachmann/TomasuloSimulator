@@ -15,7 +15,8 @@ public:
         rfRatRecords(){}
     void init(RegisterFileArray initialRf);
     void capture(ReservationStationRecord::rsrtag_t tag, int32_t value);
-    void tag(uint8_t index, ReservationStationRecord::rsrtag_t tag);
+    void tag(uint16_t index, ReservationStationRecord::rsrtag_t tag);
+    void getSource(uint16_t index, ReservationStationRecord::rsrtag_t &tag, int32_t &value);
 
 private:
     RfRatRecord rfRatRecords[RF_SIZE];
