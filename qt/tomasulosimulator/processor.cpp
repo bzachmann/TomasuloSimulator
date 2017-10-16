@@ -100,3 +100,10 @@ void Processor::step()
     FUAdd.step();
     FUMul.step();
 }
+
+void Processor::print()
+{
+#warning todo add printing of other processor parts
+    RFRAT.print();
+
+}

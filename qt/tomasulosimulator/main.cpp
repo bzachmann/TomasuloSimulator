@@ -31,6 +31,42 @@ int main(int argc, char* argv[])
         }
 
         //processor print information here
+        processor.print();
+
+        //keep stepping?
+        bool loop = false;
+        do
+        {
+            char inputChar;
+            bool stepAgain = false;
+
+            cout << endl << "Step again? (y/n): ";
+            cin >> inputChar;
+
+            if((inputChar == 'y') || (inputChar == 'Y'))
+            {
+                stepAgain = true;
+                loop = true;
+            }
+            else if((inputChar == 'n') || (inputChar == 'N'))
+            {
+                stepAgain = false;
+                loop = false;
+            }
+            else
+            {
+                cout << endl << "Invalid input.  Press y or n";
+                stepAgain = false;
+                loop = true;
+            }
+
+            if(stepAgain)
+            {
+                processor.step();
+                processor.print();
+            }
+
+        }while(loop);
     }
     else
     {

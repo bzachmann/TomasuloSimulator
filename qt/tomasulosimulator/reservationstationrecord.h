@@ -3,6 +3,7 @@
 
 #include "stdint.h"
 #include "instructionrecord.h"
+#include <string>
 
 class ReservationStationRecord
 {
@@ -49,6 +50,8 @@ public:
     int32_t getSource1Value();
     void setSource2Value(int32_t value);
     int32_t getSource2Value();
+
+    static std::string tagToString(rsrtag_t tag);
 
 
 private:

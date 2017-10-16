@@ -1,4 +1,8 @@
 #include "registerfileregisterallocationtable.h"
+#include <iostream>
+#include <iomanip>
+
+#define PRINT_WIDTH_RFRAT_INDEX     (4)
 
 void RegisterFileRegisterAllocationTable::init(RegisterFileArray initialRf)
 {
@@ -47,5 +51,19 @@ void RegisterFileRegisterAllocationTable::getSource(uint16_t index, ReservationS
             value = 0;
         }
 
+    }
+}
+
+void RegisterFileRegisterAllocationTable::print()
+{
+    std::cout << std::right << std::setw(PRINT_WIDTH_RFRAT_INDEX) << std::setfill(' ') << " " << ' ';
+    std::cout << std::right << std::setw(PRINT_WIDTH_RF) << std::setfill(' ') << "RF";
+    std::cout << std::right << std::setw(PRINT_WIDTH_RAT) << std::setfill(' ') << "RAT" << std::endl;
+
+    for(uint16_t i = 0; i < RF_SIZE; i++)
+    {
+        std::cout << std::right << std::setw(PRINT_WIDTH_RFRAT_INDEX) << std::setfill(' ') << i << ':';
+        rfRatRecords[i].print();
+        std::cout << std::endl;
     }
 }

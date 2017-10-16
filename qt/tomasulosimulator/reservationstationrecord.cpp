@@ -70,3 +70,30 @@ int32_t ReservationStationRecord::getSource2Value()
 {
     return source2Value;
 }
+
+std::string ReservationStationRecord::tagToString(ReservationStationRecord::rsrtag_t tag)
+{
+    std::string retVal;
+    switch(tag)
+    {
+    case TAG_RS1:
+        retVal = "RS1";
+        break;
+    case TAG_RS2:
+        retVal = "RS2";
+        break;
+    case TAG_RS3:
+        retVal = "RS3";
+        break;
+    case TAG_RS4:
+        retVal = "RS4";
+        break;
+    case TAG_RS5:
+        retVal = "RS5";
+        break;
+    default:
+        retVal = "   ";
+        break;
+    }
+    return retVal;
+}

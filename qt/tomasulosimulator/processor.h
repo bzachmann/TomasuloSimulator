@@ -27,6 +27,7 @@ public:
 
     void init(InstructionQueue iq, RegisterFileArray rf);
     void step();
+    void print();
 
 private:
     InstructionQueue IQ;

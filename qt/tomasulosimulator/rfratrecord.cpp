@@ -1,4 +1,7 @@
 #include "rfratrecord.h"
+#include <iomanip>
+#include <iostream>
+
 
 int32_t RfRatRecord::getRfValue() const
 {
@@ -18,4 +21,10 @@ ReservationStationRecord::rsrtag_t RfRatRecord::getRatTag() const
 void RfRatRecord::setRatTag(const ReservationStationRecord::rsrtag_t &value)
 {
     ratTag = value;
+}
+
+void RfRatRecord::print()
+{
+    std::cout << std::right << std::setw(PRINT_WIDTH_RF) << std::setfill(' ') << rfValue;
+    std::cout << std::right << std::setw(PRINT_WIDTH_RAT) << std::setfill(' ') << ReservationStationRecord::tagToString(ratTag);
 }

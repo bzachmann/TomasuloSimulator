@@ -3,6 +3,9 @@
 
 #include "reservationstationrecord.h"
 
+#define PRINT_WIDTH_RF      (11)
+#define PRINT_WIDTH_RAT     (11)
+
 class RfRatRecord
 {
 public:
@@ -14,6 +17,7 @@ public:
     void setRfValue(const int32_t &value);
     ReservationStationRecord::rsrtag_t getRatTag() const;
     void setRatTag(const ReservationStationRecord::rsrtag_t &value);
+    void print();
 
 private:
     int32_t rfValue;
