@@ -1,4 +1,5 @@
 #include "processor.h"
+#include <iostream>
 
 void Processor::init(InstructionQueue iq, RegisterFileArray rf)
 {
@@ -104,6 +105,9 @@ void Processor::step()
 void Processor::print()
 {
 #warning todo add printing of other processor parts
+    std::cout << std::endl;
     RFRAT.print();
+    std::cout << std::endl;
+    IQ.print();
 
 }

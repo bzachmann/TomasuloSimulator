@@ -10,6 +10,7 @@ Processor processor;
 InstructionQueue initialIQ;
 RegisterFileArray initialRF;
 uint16_t numCycles = 0;
+uint16_t cyclesStepped = 0;
 
 bool parseInputFile(char* file);
 bool parseUint16(string line, uint16_t &num);
@@ -28,9 +29,12 @@ int main(int argc, char* argv[])
         for(uint16_t i = 0; i < numCycles; i++)
         {
             processor.step();
+            cyclesStepped++;
         }
 
         //processor print information here
+        cout << endl;
+        cout << "Cycles Stepped: " << cyclesStepped << endl;
         processor.print();
 
         //keep stepping?
@@ -63,6 +67,10 @@ int main(int argc, char* argv[])
             if(stepAgain)
             {
                 processor.step();
+                cyclesStepped++;
+
+                cout << endl;
+                cout << "Cycles Stepped: " << cyclesStepped << endl;
                 processor.print();
             }
 

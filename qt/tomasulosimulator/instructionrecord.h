@@ -2,9 +2,13 @@
 #define INSTRUCTIONRECORD_H
 
 #include <stdint.h>
+#include <string>
 
 #define DEFAULT_DEST        (0)
 #define DEFAULT_SOURCE      (0)
+
+#define PRINT_WIDTH_OPCODE      (5)
+#define PRINT_WIDTH_REG         (4)
 
 class InstructionRecord
 {
@@ -37,6 +41,9 @@ public:
     void setSource1(const uint8_t &value);
     uint8_t getSource2() const;
     void setSource2(const uint8_t &value);
+    void print();
+
+    static std::string opcodeToString(opcode_t oc);
 
 private:
     opcode_t opcode;

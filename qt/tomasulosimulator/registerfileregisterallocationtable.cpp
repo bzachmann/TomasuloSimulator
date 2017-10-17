@@ -56,6 +56,7 @@ void RegisterFileRegisterAllocationTable::getSource(uint16_t index, ReservationS
 
 void RegisterFileRegisterAllocationTable::print()
 {
+    std::cout << "Reservation Station / Register Allocation Table" << std::endl;
     std::cout << std::right << std::setw(PRINT_WIDTH_RFRAT_INDEX) << std::setfill(' ') << " " << ' ';
     std::cout << std::right << std::setw(PRINT_WIDTH_RF) << std::setfill(' ') << "RF";
     std::cout << std::right << std::setw(PRINT_WIDTH_RAT) << std::setfill(' ') << "RAT" << std::endl;

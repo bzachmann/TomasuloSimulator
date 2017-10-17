@@ -1,4 +1,7 @@
 #include "instructionrecord.h"
+#include <iomanip>
+#include <iostream>
+#include <string>
 
 InstructionRecord::opcode_t InstructionRecord::getOpcode() const
 {
@@ -38,4 +41,54 @@ uint8_t InstructionRecord::getSource2() const
 void InstructionRecord::setSource2(const uint8_t &value)
 {
     source2 = value;
+}
+
+void InstructionRecord::print()
+{
+    if(opcode == OPCODE_UNDEF)
+    {
+        std::cout << "EMPTY";
+    }
+    else
+    {
+//        std::string tempString;
+////        tempString.append(opcodeToString(opcode));
+////        tempString.append(",");
+//        std::cout << std::left << std::setw(PRINT_WIDTH_OPCODE) << std::setfill(' ') << tempString;
+////        tempString.clear();
+////        tempString.append((char)(destination + '0'));
+////        tempString.append(",");
+//        std::cout << std::left << std::setw(PRINT_WIDTH_REG) << std::setfill(' ') << 'R' << destination << ',';
+//        std::cout << std::left << std::setw(PRINT_WIDTH_REG) << std::setfill(' ') << 'R' << source1 << ',';
+//        std::cout << std::left << std::setw(PRINT_WIDTH_REG) << std::setfill(' ') << 'R' << source2;
+
+        std::cout << opcodeToString(opcode);
+        std::cout << " R" << (char)(destination + '0') << ',';
+        std::cout << " R" << (char)(source1 + '0') << ',';
+        std::cout << " R" << (char)(source2 + '0');
+    }
+}
+
+std::string InstructionRecord::opcodeToString(InstructionRecord::opcode_t oc)
+{
+    std::string retVal;
+    switch(oc)
+    {
+    case OPCODE_ADD:
+        retVal = "Add";
+        break;
+    case OPCODE_SUB:
+        retVal = "Sub";
+        break;
+    case OPCODE_MUL:
+        retVal = "Mul";
+        break;
+    case OPCODE_DIV:
+        retVal = "Div";
+        break;
+    default:
+        retVal = "   ";
+        break;
+    }
+    return retVal;
 }

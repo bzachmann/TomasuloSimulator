@@ -13,7 +13,8 @@ SOURCES += main.cpp \
     functionalunitadd.cpp \
     functionalunitmul.cpp \
     registerfileregisterallocationtable.cpp \
-    rfratrecord.cpp
+    rfratrecord.cpp \
+    instructionqueue.cpp
 
 HEADERS += \
     fifo.h \
@@ -27,4 +28,5 @@ HEADERS += \
     functionalunitadd.h \
     functionalunitmul.h \
     registerfileregisterallocationtable.h \
-    rfratrecord.h
+    rfratrecord.h \
+    instructionqueue.h
