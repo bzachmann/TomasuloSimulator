@@ -1,4 +1,6 @@
 #include "reservationstationmuldiv.h"
+#include <iomanip>
+#include <iostream>
 
 ReservationStationMulDiv::ReservationStationMulDiv()
 {
@@ -94,4 +96,23 @@ bool ReservationStationMulDiv::dispatch(ReservationStationRecord &record)
         }
     }
     return retVal;
+}
+
+void ReservationStationMulDiv::print()
+{
+    std::cout << "Mul/Div Reservation Station" << std::endl;
+    std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << "  ";
+    std::cout << std::right << std::setw(PRINT_WIDTH_BUSY) << std::setfill(' ') << "Busy";
+    std::cout << std::right << std::setw(PRINT_WIDTH_OPCODE) << std::setfill(' ') << "Op";
+    std::cout << std::right << std::setw(PRINT_WIDTH_SOURCE) << std::setfill(' ') << "Vj";
+    std::cout << std::right << std::setw(PRINT_WIDTH_SOURCE) << std::setfill(' ') << "Vk";
+    std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << "Qj";
+    std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << "Qk";
+    std::cout << std::right << std::setw(PRINT_WIDTH_DISPATCHED) << std::setfill(' ') << "Disp" << std::endl;
+
+    for(uint8_t i = 0; i < NUM_RS_MUL_DIV_RECORDS; i++)
+    {
+        rsrecords[i].print();
+        std::cout << std::endl;
+    }
 }

@@ -5,6 +5,12 @@
 #include "instructionrecord.h"
 #include <string>
 
+#define PRINT_WIDTH_TAG         (5)
+#define PRINT_WIDTH_BUSY        (7)
+#define PRINT_WIDTH_OPCODE      (5)
+#define PRINT_WIDTH_SOURCE      (12)
+#define PRINT_WIDTH_DISPATCHED  (7)
+
 class ReservationStationRecord
 {
 public:
@@ -50,6 +56,7 @@ public:
     int32_t getSource1Value();
     void setSource2Value(int32_t value);
     int32_t getSource2Value();
+    void print();
 
     static std::string tagToString(rsrtag_t tag);
 

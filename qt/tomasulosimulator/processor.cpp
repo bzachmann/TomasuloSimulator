@@ -106,8 +106,11 @@ void Processor::print()
 {
 #warning todo add printing of other processor parts
     std::cout << std::endl;
+    RSAddSub.print();
+    std::cout << std::endl;
+    RSMulDiv.print();
+    std::cout << std::endl;
     RFRAT.print();
     std::cout << std::endl;
     IQ.print();
-
 }

@@ -16,6 +16,8 @@ public:
     void capture(ReservationStationRecord::rsrtag_t tag, int32_t value);
     bool dispatch(ReservationStationRecord &record);
 
+    void print();
+
 private:
     ReservationStationRecord rsrecords[NUM_RS_MUL_DIV_RECORDS];
 };

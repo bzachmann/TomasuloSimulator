@@ -51,17 +51,6 @@ void InstructionRecord::print()
     }
     else
     {
-//        std::string tempString;
-////        tempString.append(opcodeToString(opcode));
-////        tempString.append(",");
-//        std::cout << std::left << std::setw(PRINT_WIDTH_OPCODE) << std::setfill(' ') << tempString;
-////        tempString.clear();
-////        tempString.append((char)(destination + '0'));
-////        tempString.append(",");
-//        std::cout << std::left << std::setw(PRINT_WIDTH_REG) << std::setfill(' ') << 'R' << destination << ',';
-//        std::cout << std::left << std::setw(PRINT_WIDTH_REG) << std::setfill(' ') << 'R' << source1 << ',';
-//        std::cout << std::left << std::setw(PRINT_WIDTH_REG) << std::setfill(' ') << 'R' << source2;
-
         std::cout << opcodeToString(opcode);
         std::cout << " R" << (char)(destination + '0') << ',';
         std::cout << " R" << (char)(source1 + '0') << ',';

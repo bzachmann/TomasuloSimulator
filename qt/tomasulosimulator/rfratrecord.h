@@ -3,8 +3,8 @@
 
 #include "reservationstationrecord.h"
 
-#define PRINT_WIDTH_RF      (11)
-#define PRINT_WIDTH_RAT     (11)
+#define PRINT_WIDTH_RF      (12)
+#define PRINT_WIDTH_RAT     (12)
 
 class RfRatRecord
 {

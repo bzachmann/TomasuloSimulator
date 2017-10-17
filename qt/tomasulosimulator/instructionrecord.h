@@ -7,9 +7,6 @@
 #define DEFAULT_DEST        (0)
 #define DEFAULT_SOURCE      (0)
 
-#define PRINT_WIDTH_OPCODE      (5)
-#define PRINT_WIDTH_REG         (4)
-
 class InstructionRecord
 {
 public:

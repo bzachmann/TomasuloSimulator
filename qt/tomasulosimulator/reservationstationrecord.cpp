@@ -1,4 +1,6 @@
 #include "reservationstationrecord.h"
+#include <iomanip>
+#include <iostream>
 
 
 void ReservationStationRecord::setState(ReservationStationRecord::rsrstate_t s)
@@ -69,6 +71,66 @@ void ReservationStationRecord::setSource2Value(int32_t value)
 int32_t ReservationStationRecord::getSource2Value()
 {
     return source2Value;
+}
+
+void ReservationStationRecord::print()
+{
+    std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << tagToString(containerTag);
+
+    uint16_t busy = 0;
+    if(state != STATE_EMPTY)
+    {
+        busy = 1;
+    }
+    std::cout << std::right << std::setw(PRINT_WIDTH_BUSY) << std::setfill(' ') << busy;
+
+    if(busy)
+    {
+        std::cout << std::right << std::setw(PRINT_WIDTH_OPCODE) << std::setfill(' ') << InstructionRecord::opcodeToString(opcode);
+
+        if(source1Tag == TAG_UNDEF)
+        {
+            std::cout << std::right << std::setw(PRINT_WIDTH_SOURCE) << std::setfill(' ') << source1Value;
+        }
+        else
+        {
+            std::cout << std::right << std::setw(PRINT_WIDTH_SOURCE) << std::setfill(' ') << "  ";
+        }
+
+        if(source2Tag == TAG_UNDEF)
+        {
+            std::cout << std::right << std::setw(PRINT_WIDTH_SOURCE) << std::setfill(' ') << source2Value;
+        }
+        else
+        {
+            std::cout << std::right << std::setw(PRINT_WIDTH_SOURCE) << std::setfill(' ') << "  ";
+        }
+
+        if(source1Tag != TAG_UNDEF)
+        {
+            std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << tagToString(source1Tag);
+        }
+        else
+        {
+            std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << "  ";
+        }
+
+        if(source2Tag != TAG_UNDEF)
+        {
+            std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << tagToString(source2Tag);
+        }
+        else
+        {
+            std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << "  ";
+        }
+
+        uint16_t dispatched = 0;
+        if(state == STATE_DISPATCHED)
+        {
+            dispatched = 1;
+        }
+        std::cout << std::right << std::setw(PRINT_WIDTH_DISPATCHED) << std::setfill(' ') << dispatched;
+    }
 }
 
 std::string ReservationStationRecord::tagToString(ReservationStationRecord::rsrtag_t tag)
