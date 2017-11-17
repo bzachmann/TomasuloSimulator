@@ -14,7 +14,9 @@ SOURCES += main.cpp \
     functionalunitmul.cpp \
     registerfileregisterallocationtable.cpp \
     rfratrecord.cpp \
-    instructionqueue.cpp
+    instructionqueue.cpp \
+    robrecord.cpp \
+    reorderbuffer.cpp
 
 HEADERS += \
     fifo.h \
@@ -29,4 +31,6 @@ HEADERS += \
     functionalunitmul.h \
     registerfileregisterallocationtable.h \
     rfratrecord.h \
-    instructionqueue.h
+    instructionqueue.h \
+    robrecord.h \
+    reorderbuffer.h
