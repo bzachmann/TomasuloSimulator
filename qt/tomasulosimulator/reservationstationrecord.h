@@ -3,6 +3,7 @@
 
 #include "stdint.h"
 #include "instructionrecord.h"
+#include "robrecord.h"
 #include <string>
 
 #define PRINT_WIDTH_TAG         (5)
@@ -37,8 +38,9 @@ public:
         state(STATE_EMPTY),
         opcode(InstructionRecord::OPCODE_UNDEF),
         containerTag(TAG_UNDEF),
-        source1Tag(TAG_UNDEF),
-        source2Tag(TAG_UNDEF),
+        destTag(RobRecord::TAG_ROB_UNDEF),
+        source1Tag(RobRecord::TAG_ROB_UNDEF),
+        source2Tag(RobRecord::TAG_ROB_UNDEF),
         source1Value(0),
         source2Value(0){}
 
@@ -48,10 +50,12 @@ public:
     InstructionRecord::opcode_t getOpcode();
     void setContainerTag(rsrtag_t tag);
     rsrtag_t getContainerTag();
-    void setSource1Tag(rsrtag_t tag);
-    rsrtag_t getSource1Tag();
-    void setSource2Tag(rsrtag_t tag);
-    rsrtag_t getSource2Tag();
+    RobRecord::robtag_t getDestTag() const;
+    void setDestTag(const RobRecord::robtag_t &value);
+    void setSource1Tag(RobRecord::robtag_t tag);
+    RobRecord::robtag_t getSource1Tag();
+    void setSource2Tag(RobRecord::robtag_t tag);
+    RobRecord::robtag_t getSource2Tag();
     void setSource1Value(int32_t value);
     int32_t getSource1Value();
     void setSource2Value(int32_t value);
@@ -60,13 +64,13 @@ public:
 
     static std::string tagToString(rsrtag_t tag);
 
-
 private:
     rsrstate_t state;
     InstructionRecord::opcode_t opcode;
     rsrtag_t containerTag;
-    rsrtag_t source1Tag;
-    rsrtag_t source2Tag;
+    RobRecord::robtag_t destTag;
+    RobRecord::robtag_t source1Tag;
+    RobRecord::robtag_t source2Tag;
     int32_t source1Value;
     int32_t source2Value;
 };

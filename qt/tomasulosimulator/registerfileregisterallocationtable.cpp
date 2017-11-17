@@ -7,29 +7,30 @@
 void RegisterFileRegisterAllocationTable::init(RegisterFileArray initialRf)
 {
     int32_t tempValue = 0;
-    for(uint16_t i = 0; i < RF_SIZE; i++)
+    for(uint8_t i = 0; i < RF_SIZE; i++)
     {
         if(initialRf.getValue(i, tempValue))
         {
             rfRatRecords[i].setRfValue(tempValue);
         }
-        rfRatRecords[i].setRatTag(ReservationStationRecord::TAG_UNDEF);
+        rfRatRecords[i].setRatTag(RobRecord::TAG_ROB_UNDEF);
     }
 }
 
-void RegisterFileRegisterAllocationTable::capture(ReservationStationRecord::rsrtag_t tag, int32_t value)
+void RegisterFileRegisterAllocationTable::commit(uint16_t destIndex, RobRecord::robtag_t tag, int32_t value)
 {
-    for(uint16_t i = 0; i < RF_SIZE; i++)
+    if(destIndex < RF_SIZE)
     {
-        if(rfRatRecords[i].getRatTag() == tag)
+        rfRatRecords[destIndex].setRfValue(value);
+
+        if(rfRatRecords[destIndex].getRatTag() == tag)
         {
-            rfRatRecords[i].setRfValue(value);
-            rfRatRecords[i].setRatTag(ReservationStationRecord::TAG_UNDEF);
+            rfRatRecords[destIndex].setRatTag(RobRecord::TAG_ROB_UNDEF);
         }
     }
 }
 
-void RegisterFileRegisterAllocationTable::tag(uint16_t index, ReservationStationRecord::rsrtag_t tag)
+void RegisterFileRegisterAllocationTable::tag(uint8_t index, RobRecord::robtag_t tag)
 {
     if(index < RF_SIZE)
     {
@@ -37,12 +38,12 @@ void RegisterFileRegisterAllocationTable::tag(uint16_t index, ReservationStation
     }
 }
 
-void RegisterFileRegisterAllocationTable::getSource(uint16_t index, ReservationStationRecord::rsrtag_t &tag, int32_t &value)
+void RegisterFileRegisterAllocationTable::getSource(uint16_t index, RobRecord::robtag_t &tag, int32_t &value)
 {
     if(index < RF_SIZE)
     {
         tag = rfRatRecords[index].getRatTag();
-        if(tag == ReservationStationRecord::TAG_UNDEF)
+        if(tag == RobRecord::TAG_ROB_UNDEF)
         {
             value = rfRatRecords[index].getRfValue();
         }

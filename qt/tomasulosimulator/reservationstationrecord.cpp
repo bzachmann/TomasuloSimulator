@@ -33,22 +33,32 @@ ReservationStationRecord::rsrtag_t ReservationStationRecord::getContainerTag()
     return containerTag;
 }
 
-void ReservationStationRecord::setSource1Tag(ReservationStationRecord::rsrtag_t tag)
+RobRecord::robtag_t ReservationStationRecord::getDestTag() const
+{
+    return destTag;
+}
+
+void ReservationStationRecord::setDestTag(const RobRecord::robtag_t &value)
+{
+    destTag = value;
+}
+
+void ReservationStationRecord::setSource1Tag(RobRecord::robtag_t tag)
 {
     source1Tag = tag;
 }
 
-ReservationStationRecord::rsrtag_t ReservationStationRecord::getSource1Tag()
+RobRecord::robtag_t ReservationStationRecord::getSource1Tag()
 {
     return source1Tag;
 }
 
-void ReservationStationRecord::setSource2Tag(ReservationStationRecord::rsrtag_t tag)
+void ReservationStationRecord::setSource2Tag(RobRecord::robtag_t tag)
 {
     source2Tag = tag;
 }
 
-ReservationStationRecord::rsrtag_t ReservationStationRecord::getSource2Tag()
+RobRecord::robtag_t ReservationStationRecord::getSource2Tag()
 {
     return source2Tag;
 }
@@ -75,6 +85,7 @@ int32_t ReservationStationRecord::getSource2Value()
 
 void ReservationStationRecord::print()
 {
+#warning todo - modify to include ROB dest tag
     std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << tagToString(containerTag);
 
     uint16_t busy = 0;
@@ -108,7 +119,7 @@ void ReservationStationRecord::print()
 
         if(source1Tag != TAG_UNDEF)
         {
-            std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << tagToString(source1Tag);
+            std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << RobRecord::tagToString(source1Tag);
         }
         else
         {
@@ -117,7 +128,7 @@ void ReservationStationRecord::print()
 
         if(source2Tag != TAG_UNDEF)
         {
-            std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << tagToString(source2Tag);
+            std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << RobRecord::tagToString(source2Tag);
         }
         else
         {

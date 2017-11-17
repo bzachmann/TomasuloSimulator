@@ -10,23 +10,40 @@ void Processor::init(InstructionQueue iq, RegisterFileArray rf)
     }
 
     RFRAT.init(rf);
+    ROB.init();
 }
 
 void Processor::step()
 {
-    //broadcast and update RAT, RF, and Both RSs
+    //commit a value if available to commit
+    RobRecord commitRecord;
+    bool instrReadyForCommit = ROB.getCommitInstr(commitRecord);
+    if(instrReadyForCommit)
+    {
+        if(commitRecord.getException())
+        {
+#warning todo - handle exception here... reset everything print and exit out. do not allow step again
+            ROB.reset();
+        }
+        else
+        {
+            RFRAT.commit(commitRecord.getRegDest(), commitRecord.getContainerTag(), commitRecord.getValue());
+        }
+    }
+
+    //broadcast and update RAT, RF, and Both RSs    
     CDBObject broadcastResults;
     if(FUMul.broadcast(broadcastResults))
     {
-        RSAddSub.capture(broadcastResults.getDestTag(), broadcastResults.getResult());
-        RSMulDiv.capture(broadcastResults.getDestTag(), broadcastResults.getResult());
-        RFRAT.capture(broadcastResults.getDestTag(), broadcastResults.getResult());
+        ROB.capture(broadcastResults);
+        RSAddSub.capture(broadcastResults.getRobTag(), broadcastResults.getResult());
+        RSMulDiv.capture(broadcastResults.getRobTag(), broadcastResults.getResult());
     }
     else if(FUAdd.broadcast(broadcastResults))
     {
-        RSAddSub.capture(broadcastResults.getDestTag(), broadcastResults.getResult());
-        RSMulDiv.capture(broadcastResults.getDestTag(), broadcastResults.getResult());
-        RFRAT.capture(broadcastResults.getDestTag(), broadcastResults.getResult());
+        ROB.capture(broadcastResults);
+        RSAddSub.capture(broadcastResults.getRobTag(), broadcastResults.getResult());
+        RSMulDiv.capture(broadcastResults.getRobTag(), broadcastResults.getResult());
     }
 
     //dispatch
@@ -49,7 +66,7 @@ void Processor::step()
 
     //issue
     InstructionRecord issuedInstr;
-    if(IQ.peek(issuedInstr))
+    if(IQ.peek(issuedInstr) && !ROB.isFull())
     {
         if( ((issuedInstr.getOpcode() == InstructionRecord::OPCODE_ADD)
               ||(issuedInstr.getOpcode() == InstructionRecord::OPCODE_SUB))
@@ -59,17 +76,37 @@ void Processor::step()
             ReservationStationRecord issuedRecord;
             issuedRecord.setOpcode(issuedInstr.getOpcode());
 
-            ReservationStationRecord::rsrtag_t tempTag;
+            RobRecord::robtag_t tempTag;
             int32_t tempValue;
             RFRAT.getSource(issuedInstr.getSource1(), tempTag, tempValue);
+            if(tempTag != RobRecord::TAG_ROB_UNDEF)
+            {
+                bool robHasValue;
+                ROB.getSource(tempTag, robHasValue, tempValue);
+                if(robHasValue)
+                {
+                    tempTag = RobRecord::TAG_ROB_UNDEF;
+                }
+            }
             issuedRecord.setSource1Tag(tempTag);
             issuedRecord.setSource1Value(tempValue);
 
             RFRAT.getSource(issuedInstr.getSource2(), tempTag, tempValue);
+            if(tempTag != RobRecord::TAG_ROB_UNDEF)
+            {
+                bool robHasValue;
+                ROB.getSource(tempTag, robHasValue, tempValue);
+                if(robHasValue)
+                {
+                    tempTag = RobRecord::TAG_ROB_UNDEF;
+                }
+            }
             issuedRecord.setSource2Tag(tempTag);
             issuedRecord.setSource2Value(tempValue);
 
-            tempTag = RSAddSub.issue(issuedRecord);
+            tempTag = ROB.issue(issuedInstr);
+            issuedRecord.setDestTag(tempTag);
+            RSAddSub.issue(issuedRecord);
             RFRAT.tag(issuedInstr.getDestination(), tempTag);
         }
         else if( ((issuedInstr.getOpcode() == InstructionRecord::OPCODE_MUL)
@@ -80,22 +117,43 @@ void Processor::step()
             ReservationStationRecord issuedRecord;
             issuedRecord.setOpcode(issuedInstr.getOpcode());
 
-            ReservationStationRecord::rsrtag_t tempTag;
+            RobRecord::robtag_t tempTag;
             int32_t tempValue;
             RFRAT.getSource(issuedInstr.getSource1(), tempTag, tempValue);
+            if(tempTag != RobRecord::TAG_ROB_UNDEF)
+            {
+                bool robHasValue;
+                ROB.getSource(tempTag, robHasValue, tempValue);
+                if(robHasValue)
+                {
+                    tempTag = RobRecord::TAG_ROB_UNDEF;
+                }
+            }
             issuedRecord.setSource1Tag(tempTag);
             issuedRecord.setSource1Value(tempValue);
 
             RFRAT.getSource(issuedInstr.getSource2(), tempTag, tempValue);
+            if(tempTag != RobRecord::TAG_ROB_UNDEF)
+            {
+                bool robHasValue;
+                ROB.getSource(tempTag, robHasValue, tempValue);
+                if(robHasValue)
+                {
+                    tempTag = RobRecord::TAG_ROB_UNDEF;
+                }
+            }
             issuedRecord.setSource2Tag(tempTag);
             issuedRecord.setSource2Value(tempValue);
 
-            tempTag = RSMulDiv.issue(issuedRecord);
+            tempTag = ROB.issue(issuedInstr);
+            issuedRecord.setDestTag(tempTag);
+            RSMulDiv.issue(issuedRecord);
             RFRAT.tag(issuedInstr.getDestination(), tempTag);
         }
     }
 
-    //step RSs, step FUs
+    //step ROB, RSs, step FUs
+    ROB.step();
     RSAddSub.step();
     RSMulDiv.step();
     FUAdd.step();
@@ -104,7 +162,7 @@ void Processor::step()
 
 void Processor::print()
 {
-#warning todo add printing of other processor parts
+#warning todo add printing of ROB
     std::cout << std::endl;
     RSAddSub.print();
     std::cout << std::endl;

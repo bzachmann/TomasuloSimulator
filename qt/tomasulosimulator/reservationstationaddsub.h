@@ -12,8 +12,8 @@ public:
 
     void step();
     bool notFull();
-    ReservationStationRecord::rsrtag_t issue(ReservationStationRecord record);
-    void capture(ReservationStationRecord::rsrtag_t tag, int32_t value);
+    bool issue(ReservationStationRecord record);
+    void capture(RobRecord::robtag_t tag, int32_t value);
     bool dispatch(ReservationStationRecord &record);
     void print();
 

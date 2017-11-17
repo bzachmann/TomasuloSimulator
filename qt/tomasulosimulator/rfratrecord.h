@@ -11,17 +11,17 @@ class RfRatRecord
 public:
     RfRatRecord() :
         rfValue(0),
-        ratTag(ReservationStationRecord::TAG_UNDEF){}
+        ratTag(RobRecord::TAG_ROB_UNDEF){}
 
     int32_t getRfValue() const;
     void setRfValue(const int32_t &value);
-    ReservationStationRecord::rsrtag_t getRatTag() const;
-    void setRatTag(const ReservationStationRecord::rsrtag_t &value);
+    RobRecord::robtag_t getRatTag() const;
+    void setRatTag(const RobRecord::robtag_t &value);
     void print();
 
 private:
     int32_t rfValue;
-    ReservationStationRecord::rsrtag_t ratTag;
+    RobRecord::robtag_t ratTag;
 };
 
 #endif // RFRATRECORD_H

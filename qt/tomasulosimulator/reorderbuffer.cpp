@@ -49,15 +49,49 @@ bool ReOrderBuffer::getCommitInstr(RobRecord &robRecord)
 
 RobRecord::robtag_t ReOrderBuffer::issue(InstructionRecord instrRecord)
 {
-#warning todo - implement this
+    RobRecord::robtag_t issueTag = RobRecord::TAG_ROB_UNDEF;
+    if(!isFull())
+    {
+       bool dummy;
+       issueTag = robRecords[getIssuePtrIndex(dummy)].getContainerTag();
+       robRecords[getIssuePtrIndex(dummy)].setState(RobRecord::STATE_OCCUPIED);
+       robRecords[getIssuePtrIndex(dummy)].setException(false);
+       robRecords[getIssuePtrIndex(dummy)].setDone(false);
+       robRecords[getIssuePtrIndex(dummy)].setValue(0);
+       robRecords[getIssuePtrIndex(dummy)].setRegDest(instrRecord.getDestination());
+
+       if(robRecordsOccupied != ROB_SIZE)
+       {
+           robRecordsOccupied = (robRecordsOccupied + 1) % ROB_SIZE;
+       }
+    }
+    return issueTag;
 }
 
 void ReOrderBuffer::capture(CDBObject cdbObject)
 {
-#warning todo - implement this
-    //set state to done
-    //update value
-    //
+    for(uint8_t i = 0; i < ROB_SIZE; i++)
+    {
+        if(cdbObject.getRobTag() == robRecords[i].getContainerTag())
+        {
+            robRecords[i].setValue(cdbObject.getResult());
+            robRecords[i].setException(cdbObject.getException());
+            robRecords[i].setDone(true);
+        }
+    }
+}
+
+void ReOrderBuffer::getSource(RobRecord::robtag_t tag, bool &valid, int32_t &value)
+{
+    for(uint8_t i = 0; i < ROB_SIZE; i++)
+    {
+        if(robRecords[i].getContainerTag() == tag)
+        {
+            valid = robRecords[i].getDone();
+            value = robRecords[i].getValue();
+            break;
+        }
+    }
 }
 
 uint8_t ReOrderBuffer::getIssuePtrIndex(bool &full)

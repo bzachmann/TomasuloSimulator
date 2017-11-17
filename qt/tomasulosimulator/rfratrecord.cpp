@@ -13,18 +13,19 @@ void RfRatRecord::setRfValue(const int32_t &value)
     rfValue = value;
 }
 
-ReservationStationRecord::rsrtag_t RfRatRecord::getRatTag() const
+RobRecord::robtag_t RfRatRecord::getRatTag() const
 {
     return ratTag;
 }
 
-void RfRatRecord::setRatTag(const ReservationStationRecord::rsrtag_t &value)
+void RfRatRecord::setRatTag(const RobRecord::robtag_t &value)
 {
     ratTag = value;
 }
 
 void RfRatRecord::print()
 {
+#warning todo - fix printing
     std::cout << std::right << std::setw(PRINT_WIDTH_RF) << std::setfill(' ') << rfValue;
-    std::cout << std::right << std::setw(PRINT_WIDTH_RAT) << std::setfill(' ') << ReservationStationRecord::tagToString(ratTag);
+    std::cout << std::right << std::setw(PRINT_WIDTH_RAT) << std::setfill(' ') << RobRecord::tagToString(ratTag);
 }

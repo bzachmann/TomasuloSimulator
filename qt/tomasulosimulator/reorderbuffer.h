@@ -13,17 +13,18 @@ public:
     ReOrderBuffer() :
         robRecords() {}
     void init();
-    void reset();//used to reset rob
-    void step();//set retired records to empty, move commit pointer forward if retired
+    void reset();
+    void step();
 
-    bool getCommitInstr(RobRecord &robRecord); //return false if commit ptr pointing at not done record.  return true and set arg to commit instr otherwise.
-    RobRecord::robtag_t issue(InstructionRecord instrRecord); //pass back rob containerTag to be used in rat.  pass back UNDEF if no space
+    bool getCommitInstr(RobRecord &robRecord);
+    RobRecord::robtag_t issue(InstructionRecord instrRecord);
     void capture(CDBObject cdbObject);
+    void getSource(RobRecord::robtag_t tag, bool &valid, int32_t &value);
+    bool isFull();
 
 private:
     uint8_t getIssuePtrIndex(bool &full);
     uint8_t getCommitPtrIndex();
-    bool isFull();
 
 private:
     RobRecord robRecords[ROB_SIZE];

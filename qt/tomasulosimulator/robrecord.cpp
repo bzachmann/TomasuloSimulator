@@ -61,3 +61,33 @@ void RobRecord::setException(bool value)
 {
     exception = value;
 }
+
+std::string RobRecord::tagToString(RobRecord::robtag_t tag)
+{
+    std::string retVal;
+    switch(tag)
+    {
+    case TAG_ROB1:
+        retVal = "ROB1";
+        break;
+    case TAG_ROB2:
+        retVal = "ROB2";
+        break;
+    case TAG_ROB3:
+        retVal = "ROB3";
+        break;
+    case TAG_ROB4:
+        retVal = "ROB4";
+        break;
+    case TAG_ROB5:
+        retVal = "ROB5";
+        break;
+    case TAG_ROB6:
+        retVal = "ROB5";
+        break;
+    default:
+        retVal = "    ";
+        break;
+    }
+    return retVal;
+}

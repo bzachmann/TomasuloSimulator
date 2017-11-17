@@ -2,19 +2,20 @@
 #define ROBRECORD_H
 
 #include <stdint.h>
+#include <string>
 
 class RobRecord
 {
 public:
     enum robtag_t
     {
-        TAG_ROB1,
+        TAG_ROB1 = 0,
         TAG_ROB2,
         TAG_ROB3,
         TAG_ROB4,
         TAG_ROB5,
         TAG_ROB6,
-        TAG_ROB_UNDEF,
+        TAG_ROB_UNDEF = 255,
     };
 
     enum robstate_t
@@ -44,6 +45,8 @@ public:
     void setDone(bool value);
     bool getException() const;
     void setException(bool value);
+
+    static std::string tagToString(robtag_t tag);
 
 private:
     robtag_t containerTag;

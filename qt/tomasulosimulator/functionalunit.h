@@ -2,6 +2,7 @@
 #define FUNCTIONALUNIT_H
 
 #include "reservationstationrecord.h"
+#include "robrecord.h"
 #include "fifo.h"
 
 #define FU_RESULT_BUFFER_SIZE       (10)
@@ -10,24 +11,28 @@ class CDBObject
 {
 public:
     CDBObject():
-        destTag(ReservationStationRecord::TAG_UNDEF),
-        result(0){}
+        robTag(RobRecord::TAG_ROB_UNDEF),
+        result(0),
+        exception(false){}
 
-    ReservationStationRecord::rsrtag_t getDestTag() const;
-    void setDestTag(const ReservationStationRecord::rsrtag_t &value);
+    RobRecord::robtag_t getRobTag() const;
+    void setRobTag(const RobRecord::robtag_t &value);
     int32_t getResult() const;
     void setResult(const int32_t &value);
+    bool getException() const;
+    void setException(bool value);
 
 private:
-    ReservationStationRecord::rsrtag_t destTag;
+    RobRecord::robtag_t robTag;
     int32_t result;
+    bool exception;
 };
 
 class FunctionalUnit
 {
 public:
     FunctionalUnit():
-        destTag(ReservationStationRecord::TAG_UNDEF),
+        robTag(RobRecord::TAG_ROB_UNDEF),
         opcode(InstructionRecord::OPCODE_UNDEF),
         operand1(0),
         operand2(0),
@@ -42,7 +47,7 @@ public:
 
 
 protected:
-    ReservationStationRecord::rsrtag_t destTag;
+    RobRecord::robtag_t robTag;
     InstructionRecord::opcode_t opcode;
     int32_t operand1;
     int32_t operand2;

@@ -9,6 +9,7 @@
 #include "functionalunitmul.h"
 #include "registerfileregisterallocationtable.h"
 #include "instructionqueue.h"
+#include "reorderbuffer.h"
 
 class Processor
 {
@@ -16,6 +17,7 @@ public:
     Processor() :
         IQ(),
         RFRAT(),
+        ROB(),
         RSAddSub(),
         RSMulDiv(),
         FUAdd(),
@@ -28,6 +30,7 @@ public:
 private:
     InstructionQueue IQ;
     RegisterFileRegisterAllocationTable RFRAT;
+    ReOrderBuffer ROB;
     ReservationStationAddSub RSAddSub;
     ReservationStationMulDiv RSMulDiv;
     FunctionalUnitAdd FUAdd;

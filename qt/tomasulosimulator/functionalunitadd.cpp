@@ -36,7 +36,8 @@ void FunctionalUnitAdd::step()
             computationCycle = 0;
 
             CDBObject result;
-            result.setDestTag(destTag);
+            result.setRobTag(robTag);
+            result.setException(false);
             result.setResult(0);
 
             if(opcode == InstructionRecord::OPCODE_ADD)
@@ -49,7 +50,7 @@ void FunctionalUnitAdd::step()
             }
             else
             {
-                result.setDestTag(ReservationStationRecord::TAG_UNDEF);
+                result.setRobTag(RobRecord::TAG_ROB_UNDEF);
             }
 
             resultBuffer.put(result);

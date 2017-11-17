@@ -1,13 +1,13 @@
 #include "functionalunit.h"
 
-ReservationStationRecord::rsrtag_t CDBObject::getDestTag() const
+RobRecord::robtag_t CDBObject::getRobTag() const
 {
-    return destTag;
+    return robTag;
 }
 
-void CDBObject::setDestTag(const ReservationStationRecord::rsrtag_t &value)
+void CDBObject::setRobTag(const RobRecord::robtag_t &value)
 {
-    destTag = value;
+    robTag = value;
 }
 
 int32_t CDBObject::getResult() const
@@ -18,6 +18,16 @@ int32_t CDBObject::getResult() const
 void CDBObject::setResult(const int32_t &value)
 {
     result = value;
+}
+
+bool CDBObject::getException() const
+{
+    return exception;
+}
+
+void CDBObject::setException(bool value)
+{
+    exception = value;
 }
 
 bool FunctionalUnit::isBusy()
@@ -33,7 +43,7 @@ bool FunctionalUnit::add(ReservationStationRecord record)
         busy = true;
         computationCycle = 0;
 
-        destTag = record.getContainerTag();
+        robTag = record.getDestTag();
         opcode = record.getOpcode();
         operand1 = record.getSource1Value();
         operand2 = record.getSource2Value();

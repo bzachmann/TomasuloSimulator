@@ -14,9 +14,9 @@ public:
     RegisterFileRegisterAllocationTable():
         rfRatRecords(){}
     void init(RegisterFileArray initialRf);
-    void capture(ReservationStationRecord::rsrtag_t tag, int32_t value);
-    void tag(uint16_t index, ReservationStationRecord::rsrtag_t tag);
-    void getSource(uint16_t index, ReservationStationRecord::rsrtag_t &tag, int32_t &value);
+    void commit(uint16_t destIndex, RobRecord::robtag_t tag, int32_t value);
+    void tag(uint8_t index, RobRecord::robtag_t tag);
+    void getSource(uint16_t index, RobRecord::robtag_t &tag, int32_t &value);
     void print();
 
 private:

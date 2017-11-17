@@ -1,7 +1,8 @@
 #include "functionalunitmul.h"
 
-#define REQUIRED_CYCLES_MUL     (10)
-#define REQUIRED_CYCLES_DIV     (40)
+#define REQUIRED_CYCLES_MUL                 (10)
+#define REQUIRED_CYCLES_DIV                 (40)
+#define REQUIRED_CYCLES_DIV_EXCEPTION       (38)
 
 bool FunctionalUnitMul::add(ReservationStationRecord record)
 {
@@ -14,7 +15,14 @@ bool FunctionalUnitMul::add(ReservationStationRecord record)
         }
         else if(opcode == InstructionRecord::OPCODE_DIV)
         {
-            requiredCycles = REQUIRED_CYCLES_DIV;
+            if(operand2 == 0)
+            {
+                requiredCycles = REQUIRED_CYCLES_DIV_EXCEPTION;
+            }
+            else
+            {
+                requiredCycles = REQUIRED_CYCLES_DIV;
+            }
         }
         else
         {
@@ -36,7 +44,8 @@ void FunctionalUnitMul::step()
             computationCycle = 0;
 
             CDBObject result;
-            result.setDestTag(destTag);
+            result.setRobTag(robTag);
+            result.setException(false);
             result.setResult(0);
 
             if(opcode == InstructionRecord::OPCODE_MUL)
@@ -45,11 +54,18 @@ void FunctionalUnitMul::step()
             }
             else if(opcode == InstructionRecord::OPCODE_DIV)
             {
-                result.setResult(operand1 / operand2);
+                if(operand2 == 0)
+                {
+                   result.setException(true);
+                }
+                else
+                {
+                   result.setResult(operand1 / operand2);
+                }
             }
             else
             {
-                result.setDestTag(ReservationStationRecord::TAG_UNDEF);
+                result.setRobTag(RobRecord::TAG_ROB_UNDEF);
             }
 
             resultBuffer.put(result);

@@ -13,8 +13,8 @@ void ReservationStationMulDiv::step()
     for(uint8_t i = 0; i < NUM_RS_MUL_DIV_RECORDS; i++)
     {
         if((rsrecords[i].getState() == ReservationStationRecord::STATE_OPERAND_WAIT)
-                && (rsrecords[i].getSource1Tag() == ReservationStationRecord::TAG_UNDEF)
-                && (rsrecords[i].getSource2Tag() == ReservationStationRecord::TAG_UNDEF))
+                && (rsrecords[i].getSource1Tag() == RobRecord::TAG_ROB_UNDEF)
+                && (rsrecords[i].getSource2Tag() == RobRecord::TAG_ROB_UNDEF))
         {
            rsrecords[i].setState(ReservationStationRecord::STATE_READY_FOR_DISPATCH);
         }
@@ -39,9 +39,9 @@ bool ReservationStationMulDiv::notFull()
     return retVal;
 }
 
-ReservationStationRecord::rsrtag_t ReservationStationMulDiv::issue(ReservationStationRecord record)
+bool ReservationStationMulDiv::issue(ReservationStationRecord record)
 {
-    ReservationStationRecord::rsrtag_t containerTag = ReservationStationRecord::TAG_UNDEF;
+    bool retVal = false;
     for(uint8_t i = 0; i < NUM_RS_MUL_DIV_RECORDS; i++)
     {
         if(rsrecords[i].getState() == ReservationStationRecord::STATE_EMPTY)
@@ -52,32 +52,27 @@ ReservationStationRecord::rsrtag_t ReservationStationMulDiv::issue(ReservationSt
             rsrecords[i].setSource2Tag(record.getSource2Tag());
             rsrecords[i].setSource2Value(record.getSource2Value());
             rsrecords[i].setState(ReservationStationRecord::STATE_OPERAND_WAIT);
-            containerTag = rsrecords[i].getContainerTag();
+            retVal = true;
             break;
         }
     }
-    return containerTag;
+    return retVal;
 }
 
-void ReservationStationMulDiv::capture(ReservationStationRecord::rsrtag_t tag, int32_t value)
+void ReservationStationMulDiv::capture(RobRecord::robtag_t tag, int32_t value)
 {
     for(uint8_t i = 0; i < NUM_RS_MUL_DIV_RECORDS; i++)
     {
-        if(rsrecords[i].getContainerTag() == tag)
-        {
-            rsrecords[i].setState(ReservationStationRecord::STATE_RETIRED);
-        }
-
         if(rsrecords[i].getSource1Tag() == tag)
         {
             rsrecords[i].setSource1Value(value);
-            rsrecords[i].setSource1Tag(ReservationStationRecord::TAG_UNDEF);
+            rsrecords[i].setSource1Tag(RobRecord::TAG_ROB_UNDEF);
         }
 
         if(rsrecords[i].getSource2Tag() == tag)
         {
             rsrecords[i].setSource2Value(value);
-            rsrecords[i].setSource2Tag(ReservationStationRecord::TAG_UNDEF);
+            rsrecords[i].setSource2Tag(RobRecord::TAG_ROB_UNDEF);
         }
     }
 }
@@ -90,7 +85,7 @@ bool ReservationStationMulDiv::dispatch(ReservationStationRecord &record)
         if(rsrecords[i].getState() == ReservationStationRecord::STATE_READY_FOR_DISPATCH)
         {
             record = rsrecords[i];
-            rsrecords[i].setState(ReservationStationRecord::STATE_DISPATCHED);
+            rsrecords[i].setState(ReservationStationRecord::STATE_RETIRED);
             retVal = true;
             break;
         }
@@ -100,6 +95,7 @@ bool ReservationStationMulDiv::dispatch(ReservationStationRecord &record)
 
 void ReservationStationMulDiv::print()
 {
+    #warning todo - fix this and add destionation tag for rob
     std::cout << "Mul/Div Reservation Station" << std::endl;
     std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << "  ";
     std::cout << std::right << std::setw(PRINT_WIDTH_BUSY) << std::setfill(' ') << "Busy";
