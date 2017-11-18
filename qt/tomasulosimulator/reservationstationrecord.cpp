@@ -97,6 +97,7 @@ void ReservationStationRecord::print()
 
     if(busy)
     {
+        std::cout << std::right << std::setw(PRINT_WIDTH_DEST) << std::setfill(' ') << RobRecord::tagToString(destTag);
         std::cout << std::right << std::setw(PRINT_WIDTH_OPCODE) << std::setfill(' ') << InstructionRecord::opcodeToString(opcode);
 
         if(source1Tag == TAG_UNDEF)
@@ -134,13 +135,6 @@ void ReservationStationRecord::print()
         {
             std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << "  ";
         }
-
-        uint16_t dispatched = 0;
-        if(state == STATE_DISPATCHED)
-        {
-            dispatched = 1;
-        }
-        std::cout << std::right << std::setw(PRINT_WIDTH_DISPATCHED) << std::setfill(' ') << dispatched;
     }
 }
 

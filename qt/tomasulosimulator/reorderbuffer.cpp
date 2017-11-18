@@ -45,6 +45,7 @@ bool ReOrderBuffer::getCommitInstr(RobRecord &robRecord)
     {
         robRecord = robRecords[getCommitPtrIndex()];
         robRecords[getCommitPtrIndex()].setState(RobRecord::STATE_RETIRED);
+        retVal = true;
     }
     return retVal;
 }

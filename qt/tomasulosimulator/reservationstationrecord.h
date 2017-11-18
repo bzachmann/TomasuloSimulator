@@ -6,11 +6,11 @@
 #include "robrecord.h"
 #include <string>
 
-#define PRINT_WIDTH_TAG         (5)
+#define PRINT_WIDTH_TAG         (6)
+#define PRINT_WIDTH_DEST        (6)
 #define PRINT_WIDTH_BUSY        (7)
 #define PRINT_WIDTH_OPCODE      (5)
 #define PRINT_WIDTH_SOURCE      (12)
-#define PRINT_WIDTH_DISPATCHED  (7)
 
 class ReservationStationRecord
 {
