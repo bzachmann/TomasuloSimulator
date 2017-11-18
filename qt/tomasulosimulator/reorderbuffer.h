@@ -5,7 +5,8 @@
 #include "instructionrecord.h"
 #include "functionalunit.h"
 
-#define ROB_SIZE        (6)
+#define ROB_SIZE            (6)
+#define PRINT_WIDTH_PTR     (6)
 
 class ReOrderBuffer
 {
@@ -21,6 +22,7 @@ public:
     void capture(CDBObject cdbObject);
     void getSource(RobRecord::robtag_t tag, bool &valid, int32_t &value);
     bool isFull();
+    void print();
 
 private:
     uint8_t getIssuePtrIndex(bool &full);

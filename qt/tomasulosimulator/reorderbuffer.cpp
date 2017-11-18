@@ -1,10 +1,12 @@
 #include "reorderbuffer.h"
+#include <iomanip>
+#include <iostream>
 
 void ReOrderBuffer::init()
 {
     for(uint8_t i = 0; i < ROB_SIZE; i++)
     {
-        robRecords[i].setContainerTag((RobRecord::robtag_t)(i+1));
+        robRecords[i].setContainerTag((RobRecord::robtag_t)i);
     }
 }
 
@@ -107,5 +109,40 @@ uint8_t ReOrderBuffer::getCommitPtrIndex()
 
 bool ReOrderBuffer::isFull()
 {
-   return robRecordsOccupied == ROB_SIZE;
+    return robRecordsOccupied == ROB_SIZE;
+}
+
+void ReOrderBuffer::print()
+{
+    std::cout << "Re-Order Buffer" << std::endl;
+    std::cout << std::right << std::setw(PRINT_WIDTH_PTR) << std::setfill (' ') << " ";
+    std::cout << std::right << std::setw(PRINT_WIDTH_ROB_TAG) << std::setfill (' ') << " ";
+    std::cout << std::right << std::setw(PRINT_WIDTH_ROBDEST_REG) << std::setfill (' ') << "Dest";
+    std::cout << std::right << std::setw(PRINT_WIDTH_ROB_VALUE) << std::setfill (' ') << "Value";
+    std::cout << std::right << std::setw(PRINT_WIDTH_ROB_DONE) << std::setfill (' ') << "Done";
+    std::cout << std::right << std::setw(PRINT_WIDTH_ROB_EXCEP) << std::setfill (' ') << "Excep" <<std::endl;
+
+    for(uint8_t i = 0; i < ROB_SIZE; i++)
+    {
+        bool dummy;
+        if((getCommitPtrIndex() == i) && (getIssuePtrIndex(dummy) == i))
+        {
+             std::cout << std::right << std::setw(PRINT_WIDTH_PTR) << std::setfill (' ') << "IC ->";
+        }
+        else if(getCommitPtrIndex() == i)
+        {
+            std::cout << std::right << std::setw(PRINT_WIDTH_PTR) << std::setfill (' ') << "C ->";
+        }
+        else if(getIssuePtrIndex(dummy) == i)
+        {
+            std::cout << std::right << std::setw(PRINT_WIDTH_PTR) << std::setfill (' ') << "I ->";
+        }
+        else
+        {
+            std::cout << std::right << std::setw(PRINT_WIDTH_PTR) << std::setfill (' ') << " ";
+        }
+
+        robRecords[i].print();
+        std::cout << std::endl;
+    }
 }

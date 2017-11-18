@@ -49,6 +49,7 @@ bool ReservationStationAddSub::issue(ReservationStationRecord record)
         if(rsrecords[i].getState() == ReservationStationRecord::STATE_EMPTY)
         {
             rsrecords[i].setOpcode(record.getOpcode());
+            rsrecords[i].setDestTag(record.getDestTag());
             rsrecords[i].setSource1Tag(record.getSource1Tag());
             rsrecords[i].setSource1Value(record.getSource1Value());
             rsrecords[i].setSource2Tag(record.getSource2Tag());

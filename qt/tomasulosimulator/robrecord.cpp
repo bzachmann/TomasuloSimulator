@@ -1,4 +1,6 @@
 #include "robrecord.h"
+#include <iomanip>
+#include <iostream>
 
 
 RobRecord::robtag_t RobRecord::getContainerTag() const
@@ -62,6 +64,26 @@ void RobRecord::setException(bool value)
     exception = value;
 }
 
+void RobRecord::print()
+{
+  //containerTag, dest, val, done, exception
+    std::cout << std::right << std::setw(PRINT_WIDTH_ROB_TAG) << std::setfill(' ') << tagToString(containerTag);
+    if(state != STATE_EMPTY)
+    {
+        std::cout << std::right << std::setw(PRINT_WIDTH_ROBDEST_REG) << std::setfill(' ') << (uint16_t)regDest;
+        if(done)
+        {
+           std::cout << std::right << std::setw(PRINT_WIDTH_ROB_VALUE) << std::setfill(' ') << value;
+        }
+        else
+        {
+            std::cout << std::right << std::setw(PRINT_WIDTH_ROB_VALUE) << std::setfill(' ') << " ";
+        }
+        std::cout << std::right << std::setw(PRINT_WIDTH_ROB_DONE) << std::setfill(' ') << done;
+        std::cout << std::right << std::setw(PRINT_WIDTH_ROB_EXCEP) << std::setfill(' ') << exception;
+    }
+}
+
 std::string RobRecord::tagToString(RobRecord::robtag_t tag)
 {
     std::string retVal;
@@ -83,7 +105,7 @@ std::string RobRecord::tagToString(RobRecord::robtag_t tag)
         retVal = "ROB5";
         break;
     case TAG_ROB6:
-        retVal = "ROB5";
+        retVal = "ROB6";
         break;
     default:
         retVal = "    ";

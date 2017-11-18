@@ -162,7 +162,6 @@ void Processor::step()
 
 void Processor::print()
 {
-#warning todo add printing of ROB
     std::cout << std::endl;
     RSAddSub.print();
     std::cout << std::endl;
@@ -171,4 +170,6 @@ void Processor::print()
     RFRAT.print();
     std::cout << std::endl;
     IQ.print();
+    std::cout << std::endl;
+    ROB.print();
 }

@@ -4,6 +4,13 @@
 #include <stdint.h>
 #include <string>
 
+//containerTag, dest, val, done, exceptio
+#define PRINT_WIDTH_ROB_TAG         (6)
+#define PRINT_WIDTH_ROBDEST_REG     (5)
+#define PRINT_WIDTH_ROB_VALUE       (12)
+#define PRINT_WIDTH_ROB_DONE        (5)
+#define PRINT_WIDTH_ROB_EXCEP       (7)
+
 class RobRecord
 {
 public:
@@ -45,6 +52,7 @@ public:
     void setDone(bool value);
     bool getException() const;
     void setException(bool value);
+    void print();
 
     static std::string tagToString(robtag_t tag);
 
