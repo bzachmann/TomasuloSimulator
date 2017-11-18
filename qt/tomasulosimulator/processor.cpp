@@ -13,7 +13,7 @@ void Processor::init(InstructionQueue iq, RegisterFileArray rf)
     ROB.init();
 }
 
-void Processor::step()
+bool Processor::step()
 {
     //commit a value if available to commit
     RobRecord commitRecord;
@@ -22,8 +22,8 @@ void Processor::step()
     {
         if(commitRecord.getException())
         {
-#warning todo - handle exception here... reset everything print and exit out. do not allow step again
-            ROB.reset();
+            reset();
+            return false;
         }
         else
         {
@@ -158,6 +158,18 @@ void Processor::step()
     RSMulDiv.step();
     FUAdd.step();
     FUMul.step();
+    return true;
+}
+
+void Processor::reset()
+{
+    IQ.reset();
+    RFRAT.reset();
+    ROB.reset();
+    RSMulDiv.reset();
+    RSAddSub.reset();
+    FUMul.reset();
+    FUAdd.reset();
 }
 
 void Processor::print()

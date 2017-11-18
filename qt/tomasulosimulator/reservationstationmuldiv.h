@@ -14,6 +14,7 @@ public:
     bool notFull();
     bool issue(ReservationStationRecord record);
     void capture(RobRecord::robtag_t tag, int32_t value);
+    void reset();
     bool dispatch(ReservationStationRecord &record);
 
     void print();

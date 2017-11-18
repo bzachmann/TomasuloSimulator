@@ -78,6 +78,14 @@ void ReservationStationMulDiv::capture(RobRecord::robtag_t tag, int32_t value)
     }
 }
 
+void ReservationStationMulDiv::reset()
+{
+    for(uint8_t i = 0; i < NUM_RS_MUL_DIV_RECORDS; i++)
+    {
+        rsrecords[i].setState(ReservationStationRecord::STATE_EMPTY);
+    }
+}
+
 bool ReservationStationMulDiv::dispatch(ReservationStationRecord &record)
 {
     bool retVal = false;
@@ -96,7 +104,6 @@ bool ReservationStationMulDiv::dispatch(ReservationStationRecord &record)
 
 void ReservationStationMulDiv::print()
 {
-    #warning todo - fix this and add destionation tag for rob
     std::cout << "Mul/Div Reservation Station" << std::endl;
     std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << "  ";
     std::cout << std::right << std::setw(PRINT_WIDTH_BUSY) << std::setfill(' ') << "Busy";

@@ -58,3 +58,9 @@ bool FunctionalUnit::broadcast(CDBObject &result)
 {
     return resultBuffer.get(result);
 }
+
+void FunctionalUnit::reset()
+{
+    busy = false;
+    computationCycle = 0;
+}

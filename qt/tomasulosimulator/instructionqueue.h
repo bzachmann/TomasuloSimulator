@@ -14,6 +14,7 @@ public:
     InstructionQueue() : InstructionQueueFifo() {}
 
     void print();
+    void reset();
 };
 
 #endif // INSTRUCTIONQUEUE_H

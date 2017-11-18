@@ -69,3 +69,11 @@ void RegisterFileRegisterAllocationTable::print()
         std::cout << std::endl;
     }
 }
+
+void RegisterFileRegisterAllocationTable::reset()
+{
+    for(uint8_t i = 0; i < RF_SIZE; i++)
+    {
+        rfRatRecords[i].setRatTag(RobRecord::TAG_ROB_UNDEF);
+    }
+}

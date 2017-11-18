@@ -27,3 +27,8 @@ void InstructionQueue::print()
         std::cout << std::endl;
     }
 }
+
+void InstructionQueue::reset()
+{
+    this->flush();
+}

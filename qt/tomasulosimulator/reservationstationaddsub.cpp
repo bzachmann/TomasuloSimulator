@@ -96,9 +96,16 @@ bool ReservationStationAddSub::dispatch(ReservationStationRecord &record)
     return retVal;
 }
 
+void ReservationStationAddSub::reset()
+{
+    for(uint8_t i = 0; i < NUM_RS_ADD_SUB_RECORDS; i++)
+    {
+        rsrecords[i].setState(ReservationStationRecord::STATE_EMPTY);
+    }
+}
+
 void ReservationStationAddSub::print()
 {
-#warning todo - fix this and add destionation tag for rob
     std::cout << "Add/Sub Reservation Station" << std::endl;
     std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << "  ";
     std::cout << std::right << std::setw(PRINT_WIDTH_BUSY) << std::setfill(' ') << "Busy";

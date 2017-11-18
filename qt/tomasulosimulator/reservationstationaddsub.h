@@ -15,6 +15,7 @@ public:
     bool issue(ReservationStationRecord record);
     void capture(RobRecord::robtag_t tag, int32_t value);
     bool dispatch(ReservationStationRecord &record);
+    void reset();
     void print();
 
 private:

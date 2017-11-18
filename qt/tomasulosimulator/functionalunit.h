@@ -44,6 +44,7 @@ public:
     bool add(ReservationStationRecord record);
     virtual void step(){}
     bool broadcast(CDBObject &result);
+    void reset();
 
 
 protected:

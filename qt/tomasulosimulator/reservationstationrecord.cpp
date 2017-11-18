@@ -85,7 +85,6 @@ int32_t ReservationStationRecord::getSource2Value()
 
 void ReservationStationRecord::print()
 {
-#warning todo - modify to include ROB dest tag
     std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << tagToString(containerTag);
 
     uint16_t busy = 0;
@@ -100,7 +99,7 @@ void ReservationStationRecord::print()
         std::cout << std::right << std::setw(PRINT_WIDTH_DEST) << std::setfill(' ') << RobRecord::tagToString(destTag);
         std::cout << std::right << std::setw(PRINT_WIDTH_OPCODE) << std::setfill(' ') << InstructionRecord::opcodeToString(opcode);
 
-        if(source1Tag == TAG_UNDEF)
+        if(source1Tag == RobRecord::TAG_ROB_UNDEF)
         {
             std::cout << std::right << std::setw(PRINT_WIDTH_SOURCE) << std::setfill(' ') << source1Value;
         }
@@ -109,7 +108,7 @@ void ReservationStationRecord::print()
             std::cout << std::right << std::setw(PRINT_WIDTH_SOURCE) << std::setfill(' ') << "  ";
         }
 
-        if(source2Tag == TAG_UNDEF)
+        if(source2Tag == RobRecord::TAG_ROB_UNDEF)
         {
             std::cout << std::right << std::setw(PRINT_WIDTH_SOURCE) << std::setfill(' ') << source2Value;
         }
@@ -118,7 +117,7 @@ void ReservationStationRecord::print()
             std::cout << std::right << std::setw(PRINT_WIDTH_SOURCE) << std::setfill(' ') << "  ";
         }
 
-        if(source1Tag != TAG_UNDEF)
+        if(source1Tag != RobRecord::TAG_ROB_UNDEF)
         {
             std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << RobRecord::tagToString(source1Tag);
         }
@@ -127,7 +126,7 @@ void ReservationStationRecord::print()
             std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << "  ";
         }
 
-        if(source2Tag != TAG_UNDEF)
+        if(source2Tag != RobRecord::TAG_ROB_UNDEF)
         {
             std::cout << std::right << std::setw(PRINT_WIDTH_TAG) << std::setfill(' ') << RobRecord::tagToString(source2Tag);
         }

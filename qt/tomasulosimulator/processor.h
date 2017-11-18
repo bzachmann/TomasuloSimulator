@@ -24,7 +24,8 @@ public:
         FUMul(){}
 
     void init(InstructionQueue iq, RegisterFileArray rf);
-    void step();
+    bool step();
+    void reset();
     void print();
 
 private:
@@ -35,8 +36,6 @@ private:
     ReservationStationMulDiv RSMulDiv;
     FunctionalUnitAdd FUAdd;
     FunctionalUnitMul FUMul;
-
-
 };
 
 #endif // PROCESSOR_H

@@ -18,6 +18,7 @@ public:
     void tag(uint8_t index, RobRecord::robtag_t tag);
     void getSource(uint16_t index, RobRecord::robtag_t &tag, int32_t &value);
     void print();
+    void reset();
 
 private:
     RfRatRecord rfRatRecords[RF_SIZE];
