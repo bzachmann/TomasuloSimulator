@@ -65,7 +65,7 @@ RobRecord::robtag_t ReOrderBuffer::issue(InstructionRecord instrRecord)
 
        if(robRecordsOccupied != ROB_SIZE)
        {
-           robRecordsOccupied = (robRecordsOccupied + 1) % ROB_SIZE;
+           robRecordsOccupied++;
        }
     }
     return issueTag;
